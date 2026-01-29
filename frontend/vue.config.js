@@ -5,7 +5,7 @@ function resolve (dir) {
   return path.join(__dirname, dir)
 }
 
-// vue.config.js
+// vue.config.js测试
 module.exports = {
   /*
     Vue-cli3:
