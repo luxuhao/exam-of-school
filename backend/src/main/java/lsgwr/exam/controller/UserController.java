@@ -33,7 +33,7 @@ public class UserController {
     @ApiOperation("注册")
     ResultVO<User> register(@RequestBody RegisterDTO registerDTO) {
         ResultVO<User> resultVO;
-        // 注册信息的完善，还有唯一性校验没(用户名、邮箱和手机号)已经在user表中通过unique来设置了
+        // 注册信息的完善，还有唯一性校验没(用户名、邮箱和手机号)已经在user表中通过unique来设置了,有点问题啊
         User user = userService.register(registerDTO);
         if (user != null) {
             // 注册成功
