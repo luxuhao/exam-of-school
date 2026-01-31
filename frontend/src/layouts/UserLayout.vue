@@ -9,7 +9,7 @@
           </a>
         </div>
         <div class="desc">
-          基于SpringBoot+Vue实现的在线考试系统
+          世纪城实验小学综合学科在线考试系统
         </div>
       </div>
 
@@ -17,12 +17,14 @@
 
       <div class="footer">
         <div class="links">
-          <a href="https://github.com/19920625lsg/spring-boot-online-exam" target="_blank">代码仓</a>
-          <a href="https://19920625lsg.github.io" target="_blank">关于我</a>
-          <a href="mailto:liangshanguang2@gmail.com">联系我</a>
+          <!--
+          <a href="" target="_blank">代码仓</a>
+          <a href="" target="_blank">关于我</a>
+          -->
+          <a href="mailto:1104264876@qq.com">联系我</a>
         </div>
         <div class="copyright">
-          Copyright &copy; 2020 Liang Shan Guang
+          Copyright &copy; 2026 Lu Xu Hao
         </div>
       </div>
     </div>

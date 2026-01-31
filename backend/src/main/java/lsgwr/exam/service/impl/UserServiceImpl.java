@@ -9,17 +9,11 @@ package lsgwr.exam.service.impl;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.IdUtil;
 import lsgwr.exam.dto.RegisterDTO;
-import lsgwr.exam.entity.Action;
-import lsgwr.exam.entity.Page;
-import lsgwr.exam.entity.Role;
-import lsgwr.exam.entity.User;
+import lsgwr.exam.entity.*;
 import lsgwr.exam.enums.LoginTypeEnum;
 import lsgwr.exam.enums.RoleEnum;
 import lsgwr.exam.qo.LoginQo;
-import lsgwr.exam.repository.ActionRepository;
-import lsgwr.exam.repository.PageRepository;
-import lsgwr.exam.repository.RoleRepository;
-import lsgwr.exam.repository.UserRepository;
+import lsgwr.exam.repository.*;
 import lsgwr.exam.service.UserService;
 import lsgwr.exam.utils.JwtUtils;
 import lsgwr.exam.vo.*;
@@ -47,19 +41,24 @@ public class UserServiceImpl implements UserService {
     @Autowired
     ActionRepository actionRepository;
 
+    @Autowired
+    GradeLevelRepository gradeLevelRepository;
+
 
     @Override
     public User register(RegisterDTO registerDTO) {
         try {
             User user = new User();
-            user.setUserId(IdUtil.simpleUUID());
+            // 先不用uuid 设置用户id
+            // user.setUserId(IdUtil.simpleUUID());
             // 好像还缺少个用户名,用"exam_user_手机号"来注册：需要校验唯一性数据字段已经设置unique了，失败会异常地
             String defaultUsername = "user";
             user.setUserUsername(defaultUsername + "_" + registerDTO.getMobile());
             // 初始化昵称和用户名相同
             user.setUserNickname(user.getUserUsername());
-            // 这里还需要进行加密处理，后续解密用Base64.decode()
-            user.setUserPassword(Base64.encode(registerDTO.getPassword()));
+            // 这里还需要进行加密处理，后续解密用Base64.decode(),先不加密了
+            // user.setUserPassword(Base64.encode(registerDTO.getPassword()));
+            user.setUserPassword(registerDTO.getPassword());
             // 默认设置为学生身份，需要老师和学生身份地话需要管理员修改
             user.setUserRoleId(RoleEnum.STUDENT.getId());
             // 设置头像图片地址, 先默认一个地址，后面用户可以自己再改
@@ -93,13 +92,16 @@ public class UserServiceImpl implements UserService {
         }
         if (user != null) {
             // 如果user不是null即能找到，才能验证用户名和密码
-            // 数据库存的密码
-            String passwordDb = Base64.decodeStr(user.getUserPassword());
+            // 数据库存的密码,先不解密了
+            // String passwordDb = Base64.decodeStr(user.getUserPassword());
+            String passwordDb = user.getUserPassword();
             // 用户请求参数中的密码
             String passwordQo = loginQo.getPassword();
             System.out.println(passwordDb);
             System.out.println(passwordQo);
+
             if (passwordQo.equals(passwordDb)) {
+                System.out.println("认证成功,返回token");
                 // 如果密码相等地话说明认证成功,返回生成的token，有效期为一天
                 return JwtUtils.genJsonWebToken(user);
             }
@@ -169,6 +171,12 @@ public class UserServiceImpl implements UserService {
         roleVo.setPageVoList(pageVoList);
         // 最终把PageVo设置到UserInfoVo中，这样就完成了拼接
         userInfoVo.setRoleVo(roleVo);
+
+        // 设置年段信息
+        Integer gradeLevelId = user.getUserGradeLevelId();
+        GradeLevel gradeLevel = gradeLevelRepository.findById(gradeLevelId).orElse(null);
+        userInfoVo.setUserGradeLevelName(gradeLevel.getGradeLevelName());
+        userInfoVo.setGradeLevelDescription(gradeLevel.getGradeLevelDescription());
         return userInfoVo;
     }
 }

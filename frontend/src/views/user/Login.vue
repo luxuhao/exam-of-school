@@ -17,10 +17,10 @@
             <a-input
               size="large"
               type="text"
-              placeholder="请输入帐户名/邮箱/手机号"
+              placeholder="请输入用户名/手机号"
               v-decorator="[
                 'username',
-                {rules: [{ required: true, message: '请输入帐户名/邮箱/手机号' }, { validator: handleUsernameOrEmail }], validateTrigger: 'change'}
+                {rules: [{ required: true, message: '请输入用户名/手机号' }, { validator: handleUsernameOrEmail }], validateTrigger: 'change'}
               ]"
             >
               <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }"/>
@@ -46,7 +46,9 @@
 
       <a-form-item>
         <a-checkbox v-decorator="['rememberMe']">自动登录</a-checkbox>
+		<!-- 先隐藏注册
         <router-link class="register" :to="{ name: 'register' }" style="float: right;">注册账户</router-link>
+		-->
       </a-form-item>
 
       <a-form-item style="margin-top:24px">

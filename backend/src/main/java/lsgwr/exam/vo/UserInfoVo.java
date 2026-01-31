@@ -38,6 +38,12 @@ public class UserInfoVo {
     @JsonProperty("roleId")
     private String roleName;
 
+    @JsonProperty("userGradeLevelId")
+    private String userGradeLevelName;
+
+    @JsonProperty("gradeLevelDescription")
+    private String gradeLevelDescription;
+
     @JsonProperty("welcome")
     private String userDescription;
 
