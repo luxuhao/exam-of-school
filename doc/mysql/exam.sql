@@ -11,7 +11,7 @@
  Target Server Version : 80408
  File Encoding         : 65001
 
- Date: 03/02/2026 18:24:32
+ Date: 03/02/2026 20:06:11
 */
 
 SET NAMES utf8mb4;
@@ -73,7 +73,7 @@ CREATE TABLE `exam`  (
 -- ----------------------------
 -- Records of exam
 -- ----------------------------
-INSERT INTO `exam` VALUES ('1b973a05369a4cc99045b3c537447d9b', '2025年测试', '<p><br></p>', 8, '22', '9f9cd4e079f946c5bc6e33d68620295f-', '9f9cd4e079f946c5bc6e33d68620295f', NULL, '', 5, 5, NULL, 5, '3', 20, '2026-02-03 15:53:56', '2026-02-03 15:53:56', '2026-02-03 15:53:56', '2026-02-03 16:59:06', 1, 1);
+INSERT INTO `exam` VALUES ('1b973a05369a4cc99045b3c537447d9b', '2025年测试', '<p><br></p>', 8, '22', '9f9cd4e079f946c5bc6e33d68620295f-', '9f9cd4e079f946c5bc6e33d68620295f', NULL, '', 5, 5, NULL, 5, '3', 20, '2026-02-03 15:53:56', '2026-02-03 15:53:56', '2026-02-03 15:53:56', '2026-02-03 19:15:03', 2, 1);
 INSERT INTO `exam` VALUES ('40fb07a302c04154bb564f9591bb5594', '2025年测试', '<p><br></p>', 8, '25', '9f9cd4e079f946c5bc6e33d68620295f-144bf174dbff40e4910918e8a0297339', '9f9cd4e079f946c5bc6e33d68620295f', NULL, '144bf174dbff40e4910918e8a0297339', 10, 5, NULL, 5, '3', 90, '2026-02-03 15:58:31', '2026-02-03 15:58:31', '2026-02-03 15:58:31', '2026-02-03 16:54:37', 2, 1);
 INSERT INTO `exam` VALUES ('4af7ae9fa2874a0d9ae6acbe9f0ff30d', '2025年测试', '<p><br></p>', 8, '25', '9f9cd4e079f946c5bc6e33d68620295f-', '9f9cd4e079f946c5bc6e33d68620295f', NULL, '', 5, 5, NULL, 5, '3', 90, '2026-02-03 15:58:20', '2026-02-03 15:58:20', '2026-02-03 15:58:20', '2026-02-03 15:58:20', 1, 1);
 INSERT INTO `exam` VALUES ('d805dad6b52140c1ba320cc09bf289ad', '2025年测试', '<p><br></p>', 7, '瑞特', '5a211e43b0fc4f7eb041f1c6880e466e-', '5a211e43b0fc4f7eb041f1c6880e466e', NULL, '', 5, 5, NULL, 5, '3', 90, '2026-02-03 15:44:16', '2026-02-03 15:44:16', '2026-02-03 15:44:16', '2026-02-03 15:51:56', 1, 1);
@@ -99,6 +99,7 @@ CREATE TABLE `exam_record`  (
 -- ----------------------------
 INSERT INTO `exam_record` VALUES ('0b20d190a7394c1287589065b1b280f8', '4', '2026-02-03 17:00:15', NULL, 0, NULL, '144bf174dbff40e4910918e8a0297339@False_0c84782421104993b6ed86aed8f0657f$9f9cd4e079f946c5bc6e33d68620295f@False_72c1b9ca9f8d43b5bbab1f5206b984e5', '40fb07a302c04154bb564f9591bb5594');
 INSERT INTO `exam_record` VALUES ('3c842cd046f14bfc9a03e915420a176c', '3', '2026-02-03 16:54:54', NULL, 0, NULL, '144bf174dbff40e4910918e8a0297339@False_0c84782421104993b6ed86aed8f0657f$9f9cd4e079f946c5bc6e33d68620295f@False_72c1b9ca9f8d43b5bbab1f5206b984e5', '40fb07a302c04154bb564f9591bb5594');
+INSERT INTO `exam_record` VALUES ('7685ef6d265043c98bb16ae142fafc6a', '4', '2026-02-03 19:16:24', NULL, 0, NULL, '9f9cd4e079f946c5bc6e33d68620295f@False_72c1b9ca9f8d43b5bbab1f5206b984e5', '1b973a05369a4cc99045b3c537447d9b');
 
 -- ----------------------------
 -- Table structure for exam_record_level
@@ -129,7 +130,7 @@ CREATE TABLE `exam_type`  (
   `exam_type_name` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL COMMENT '试卷类型名称',
   `exam_type_description` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL COMMENT '试卷类型的描述',
   PRIMARY KEY (`exam_type_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '问题类型' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '问题类型' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of exam_type
@@ -256,7 +257,7 @@ INSERT INTO `question` VALUES ('144bf174dbff40e4910918e8a0297339', '计算机计
 INSERT INTO `question` VALUES ('3ed7d961b7d14e0cbc3029219b28fde3', '<p>废旧的手机可以随便丢弃</p>', 5, '3', 7, 3, 3, 1, '<p><br></p>', '03a903a719154ef1ab8c56b6019fe258-f2292e28512a4e9984f42eb24af81f95', 'f2292e28512a4e9984f42eb24af81f95', '2026-02-03 15:40:22', '2026-02-03 15:40:22');
 INSERT INTO `question` VALUES ('5860b9ec9b0f4d8fb04bd1732b576832', '<p>生活中可以随便扫描街头的二维码</p>', 5, '3', 7, 3, 3, 1, '<p><br></p>', '4124e29b9748442f9d1c68fbad14e01d-6207787a2fc641e79fa26c0bf10be369', '6207787a2fc641e79fa26c0bf10be369', '2026-02-03 15:39:46', '2026-02-03 15:39:46');
 INSERT INTO `question` VALUES ('59e1aab1712148c9ae0095f421c01309', '<p>学校有2位信息老师吗</p>', 5, '3', 8, 3, 3, 1, '<p><br></p>', '65f7f623cc514db9864af72cd1123520-7c2b959c8bd141caa6b98a1771a13a18', '65f7f623cc514db9864af72cd1123520', '2026-02-03 15:59:56', '2026-02-03 15:59:56');
-INSERT INTO `question` VALUES ('5a211e43b0fc4f7eb041f1c6880e466e', '<p>下列是计算机硬件的选项是</p>', 5, '3', 7, 3, 1, 1, '<p><br></p>', '1f453edfc7274804b5d534e45e51ab42-2ab8ccc3bc144d7ba521541f013cbfc2-939b0c5409154db288b60330423cde53', '1f453edfc7274804b5d534e45e51ab42', '2026-02-03 15:41:16', '2026-02-03 15:41:16');
+INSERT INTO `question` VALUES ('5a211e43b0fc4f7eb041f1c6880e466e', '<p>下列是计算机硬件的选项是</p>', 5, '3', 11, 3, 1, 1, '<p><br></p>', '1f453edfc7274804b5d534e45e51ab42-2ab8ccc3bc144d7ba521541f013cbfc2-939b0c5409154db288b60330423cde53', '1f453edfc7274804b5d534e45e51ab42-', '2026-02-03 15:41:16', '2026-02-03 19:14:51');
 INSERT INTO `question` VALUES ('9f9cd4e079f946c5bc6e33d68620295f', '<p>下列是算法流程图图示的为</p>', 5, '3', 8, 1, 1, 1, '<p><br></p>', '72c1b9ca9f8d43b5bbab1f5206b984e5', '', '2026-02-03 15:42:32', '2026-02-03 15:42:32');
 INSERT INTO `question` VALUES ('f265a8e6688c4df8bd11629c4c89a732', '<p>计算机的1+1</p>', 5, '3', 8, 1, 1, 1, '<p><br></p>', 'b595bbcfe75e4c379048e3c5d974c804-6d57d11c75c8476084bbbf6659f09342', 'b595bbcfe75e4c379048e3c5d974c804', '2026-02-03 16:48:51', '2026-02-03 16:48:51');
 
