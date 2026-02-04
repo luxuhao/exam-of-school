@@ -1,9 +1,31 @@
 <template>
   <div>
-    <a-card style="margin-top: 24px" :bordered="false" title="参加过的考试">
+    <a-card style="margin-top: 24px" :bordered="false" title="考试记录信息">
       <div slot="extra">
+        <!-- <a-cascader v-model:value="value" :options="cascaderOptions" /> -->
+          <a-space>
+            <a-select
+              v-model:value="province"
+              style="width: 120px"
+              :options="cascaderOptions"
+            >
+            </a-select>
+            <a-select
+              v-model:value="secondCity"
+              style="width: 120px"
+              :options="cascaderOptions"
+            >
+            </a-select>
+          </a-space>
         <a-input-search style="margin-left: 16px; width: 272px;"/>
       </div>
+      <BootstrapTable
+        ref="table"
+        :columns="columns"
+        :data="tableData"
+        :options="options"
+      />
+      <!--      
       <a-list size="large">
         <a-list-item :key="index" v-for="(item, index) in data">
           <a-list-item-meta :description="item.exam.examDescription">
@@ -12,6 +34,8 @@
           </a-list-item-meta>
           <div slot="actions">
             <a @click="viewExamRecordDetail(item.examRecord)">查看考试详情</a>
+            <a>|</a>
+            <a @click="">删除记录</a>
           </div>
           <div class="list-content">
             <div class="list-content-item">
@@ -28,16 +52,17 @@
             </div>
           </div>
         </a-list-item>
-      </a-list>
-
+      </a-list> 
+      -->
     </a-card>
   </div>
 </template>
 
 <script>
 import HeadInfo from '../../components/tools/HeadInfo'
-import { getExamRecordList } from '../../api/exam'
-
+import { getExamRecordList, DeleteExamRecord } from '../../api/exam'
+import '../../plugins/bootstrap-table'
+import $ from 'jquery'
 export default {
   // 考试记录列表，记录考生参加过地所有考试和考试成绩
   name: 'ExamRecordList',
@@ -45,8 +70,117 @@ export default {
     HeadInfo
   },
   data () {
+    const that = this // 方便在bootstrap-table中引用methods
     return {
-      data: {}
+      data: {},
+      // 表头
+      columns: [
+        {
+          title: '序号',
+          field: 'serial',
+          formatter: function (value, row, index) {
+            return index + 1 // 这样的话每翻一页都会重新从1开始，
+          }
+        },
+        {
+          title: '试卷名称',
+          field: 'exam.examName',
+          formatter: (value, row) => {
+            return '<div class="exam-name">' + value + '</div>'
+          }
+        },
+        {
+          title: '所属学科',
+          field: 'exam.examQuestionCategoryName',
+          formatter: (value, row) => {
+            return '<div class="exam-category-name">' + value + '</div>'
+          }
+        },
+        {
+          title: '学生姓名',
+          field: 'user.userUsername',
+          formatter: (value, row) => {
+            return '<div class="exam-user-name">' + value + '</div>'
+          }
+        },
+        {
+          title: '年段',
+          field: 'user.userGradeLevelId',
+          formatter: (value, row) => {
+            return '<div class="exam-user-grade-level">' + value + '</div>'
+          }
+        },
+        {
+          title: '班级',
+          field: 'user.userClassId',
+          formatter: (value, row) => {
+            return '<div class="exam-user-class">' + value + '</div>'
+          }
+        },
+        {
+          title: '学号',
+          field: 'user.userNum',
+          formatter: (value, row) => {
+            return '<div class="exam-user-num">' + value + '</div>'
+          }
+        },
+        {
+          title: '分数',
+          field: 'examRecord.examJoinScore',
+          formatter: (value, row) => {
+            return '<div class="exam-join-score">' + value + '</div>'
+          }
+        },
+        {
+          title: '开考时间',
+          field: 'examRecord.examJoinDate',
+          formatter: (value, row) => {
+            return '<div class="exam-join-date">' + value + '</div>'
+          }
+        },
+        {
+          title: '操作',
+          field: 'action',
+          width: '150px',
+          formatter: (value, row) => {
+            return '<button type="button" class="btn btn-success delete-exam">重考</button>'
+          },
+          events: {
+            'click .delete-exam': function (e, value, row, index) {
+              that.handleDel(row)
+            }
+          }
+        },
+        
+      ],
+      tableData: [], // bootstrap-table的数据
+      // custom bootstrap-table
+      options: {
+        search: true,
+        showColumns: true,
+        showExport: true,
+        pagination: true,
+        toolbar: '#toolbar',
+        // 下面两行是支持高级搜索，即按照字段搜索
+        advancedSearch: true,
+        idTable: 'advancedTable',
+        // 下面是常用的事件，更多的点击事件可以参考：http://www.itxst.com/bootstrap-table-events/tutorial.html
+        // onClickRow: that.clickRow,
+        // onClickCell: that.clickCell, // 单元格单击事件
+        onDblClickCell: that.dblClickCell// 单元格双击事件
+      },
+      cascaderOptions: [
+       {
+         value: 'zhejiang',
+         label: 'Zhejiang',
+         isLeaf: false,
+       },
+       {
+         value: 'jiangsu',
+         label: 'Jiangsu',
+         isLeaf: false,
+       },
+      ]
     }
   },
   methods: {
@@ -61,13 +195,34 @@ export default {
       })
       // 和点击考试卡片效果一样，跳转到考试页面，里面有所有题目的情况，相当于就是详情了
       window.open(routeUrl.href, '_blank')
-    }
-  },
-  mounted () {
+    },
+    handleDel (record) {
+      console.log("删除考试")
+      DeleteExamRecord(record.examRecord.examRecordId).then(res => {
+        this.loadAll()
+        if (res.code === 0) {
+          console.log("删除成功")
+        } else {
+          this.$notification.error({
+            message: '重考操作失败',
+            description: res.msg
+          })
+        }
+      }).catch(err => {
+        // 失败就弹出警告消息
+        this.$notification.error({
+          message: '重考操作失败',
+          description: err.message
+        })
+      })
+      
+    },
+  loadAll () {
     // 从后端数据获取考试列表，适配前端卡片
     getExamRecordList().then(res => {
       if (res.code === 0) {
-        this.data = res.data
+        this.tableData = res.data
+        this.$refs.table._initTable()
       } else {
         this.$notification.error({
           message: '获取考试记录失败',
@@ -81,6 +236,10 @@ export default {
         description: err.message
       })
     })
+  },
+  },
+  mounted () {
+    this.loadAll() // 加载所有问题的数据
   }
 }
 </script>

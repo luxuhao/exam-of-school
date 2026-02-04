@@ -436,6 +436,7 @@ public class ExamServiceImpl implements ExamService {
         exam.setUpdateTime(new Date());
         exam.setGradeVolumeId(examCreateVo.getGradeVolumeId());
         exam.setExamQuestionCategoryId(examCreateVo.getExamCategoryId());
+        exam.setExamQuestionCategoryName(questionCategoryRepository.findById(exam.getExamQuestionCategoryId()).orElse(null).getQuestionCategoryName());
         exam.setExamTypeId(1);
         // Todo:这两个日志后面是要在前端传入的，这里暂时定为当前日期
         exam.setExamStartDate(new Date());
@@ -492,6 +493,7 @@ public class ExamServiceImpl implements ExamService {
         exam.setUpdateTime(new Date()); // 考试的更新日期要记录下
         exam.setGradeVolumeId(examVo.getGradeVolumeId());
         exam.setExamQuestionCategoryId(examVo.getExamCategoryId());
+        exam.setExamQuestionCategoryName(questionCategoryRepository.findById(exam.getExamQuestionCategoryId()).orElse(null).getQuestionCategoryName());
         String radioIdsStr = "";
         //String checkIdsStr = "";
         String judgeIdsStr = "";
@@ -532,6 +534,23 @@ public class ExamServiceImpl implements ExamService {
         exam.setExamScore(examScore);
         examRepository.save(exam);
         return exam;
+    }
+
+    @Override
+    public Integer deleteExam(String examId) {
+        try {
+            // 调用Repository的deleteById方法
+            examRepository.deleteById(examId);
+            // 检查是否删除成功（可选）
+            if (!examRepository.existsById(examId)) {
+                return 1; // 删除成功
+            }
+            return 0; // 删除失败
+        } catch (Exception e) {
+            // 处理异常
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     @Override
@@ -655,6 +674,23 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
+    public List<ExamRecordVo> getExamRecordAll() {
+        List<ExamRecord> examRecordList = examRecordRepository.findAll();
+        List<ExamRecordVo> examRecordVoList = new ArrayList<>();
+        for (ExamRecord examRecord : examRecordList) {
+            ExamRecordVo examRecordVo = new ExamRecordVo();
+            Exam exam = examRepository.findById(examRecord.getExamId()).orElse(null);
+            // 获取试卷所属学科名字
+            examRecordVo.setExam(exam);
+            User user = userRepository.findById(examRecord.getExamJoinerId()).orElse(null);
+            examRecordVo.setUser(user);
+            examRecordVo.setExamRecord(examRecord);
+            examRecordVoList.add(examRecordVo);
+        }
+        return examRecordVoList;
+    }
+
+    @Override
     public List<ExamRecordVo> getExamRecordList(String userId) {
         // 获取指定用户下的考试记录列表
         List<ExamRecord> examRecordList = examRecordRepository.findByExamJoinerIdOrderByExamJoinDateDesc(userId);
@@ -669,6 +705,23 @@ public class ExamServiceImpl implements ExamService {
             examRecordVoList.add(examRecordVo);
         }
         return examRecordVoList;
+    }
+
+    @Override
+    public Integer deleteExamRecord(String examRecordId) {
+        try {
+            // 调用Repository的deleteById方法
+            examRecordRepository.deleteById(examRecordId);
+            // 检查是否删除成功（可选）
+            if (!examRecordRepository.existsById(examRecordId)) {
+                return 1; // 删除成功
+            }
+            return 0; // 删除失败
+        } catch (Exception e) {
+            // 处理异常
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     @Override

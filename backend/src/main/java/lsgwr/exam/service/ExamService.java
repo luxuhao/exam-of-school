@@ -95,12 +95,24 @@ public interface ExamService {
     ExamRecord judge(String userId, String examId, HashMap<String, List<String>> answersMap);
 
     /**
+     * 获取所有的考试记录列表
+     */
+    List<ExamRecordVo> getExamRecordAll();
+
+    /**
      * 根据用户id获取此用户的所有考试信息
      *
      * @param userId 用户id
      * @return 该用户的所有考试记录
      */
     List<ExamRecordVo> getExamRecordList(String userId);
+
+    /**
+     * 根据考试记录ID删除考试信息
+     * @param examRecordId
+     * @return
+     */
+    Integer deleteExamRecord(String examRecordId);
 
     /**
      * 获取指定某次考试记录的详情
@@ -119,4 +131,12 @@ public interface ExamService {
      * @return 更新后的考试详情
      */
     Exam update(ExamVo examVo, String userId);
+
+    /**
+     * 根据试卷ID删除试卷信息
+     * @param examId
+     * @return
+     */
+    Integer deleteExam(String examId);
+
 }

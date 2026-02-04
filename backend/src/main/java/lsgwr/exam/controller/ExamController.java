@@ -165,6 +165,21 @@ public class ExamController {
         return resultVO;
     }
 
+    @GetMapping("/delete/{examId}")
+    @ApiOperation("删除考试试卷")
+    ResultVO deleteExam(@PathVariable String examId) {
+        ResultVO resultVO;
+        try {
+            // 1 获取考试记录ID
+            Integer isDel = examService.deleteExam(examId);
+            resultVO = new ResultVO(0, "删除考试试卷成功", isDel);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultVO = new ResultVO(-1, "删除考试试卷失败", null);
+        }
+        return resultVO;
+    }
+
     @GetMapping("/card/list")
     @ApiOperation("根据当前用户的年段获取考试列表，适配前端卡片列表")
     ResultVO<List<ExamCardVo>> getExamCardList(HttpServletRequest request) {
@@ -216,18 +231,41 @@ public class ExamController {
 
 
     @GetMapping("/record/list")
-    @ApiOperation("获取当前用户的考试记录")
+    @ApiOperation("获取用户的考试记录")
     ResultVO<List<ExamRecordVo>> getExamRecordList(HttpServletRequest request) {
+        // 如果当前用户是管理员 则获取所有考试记录
+        // 否则获取当前用户考试记录
         ResultVO<List<ExamRecordVo>> resultVO;
         try {
             // 拦截器里设置上的用户id
             String userId = (String) request.getAttribute("user_id");
+            // 如果当前用户是管理员
+            if(userService.getUserInfo(userId).getUserRoleId().equals(1)) {
+                List<ExamRecordVo> examRecordVoList = examService.getExamRecordAll();
+                resultVO = new ResultVO<>(0, "获取考试记录成功", examRecordVoList);
+                return resultVO;
+            }
             // 下面根据用户账号拿到他(她所有的考试信息)，注意要用VO封装下
             List<ExamRecordVo> examRecordVoList = examService.getExamRecordList(userId);
             resultVO = new ResultVO<>(0, "获取考试记录成功", examRecordVoList);
         } catch (Exception e) {
             e.printStackTrace();
             resultVO = new ResultVO<>(-1, "获取考试记录失败", null);
+        }
+        return resultVO;
+    }
+
+    @GetMapping("/record/delete/{examRecordId}")
+    @ApiOperation("删除用户的考试记录")
+    ResultVO deleteExamRecord(@PathVariable String examRecordId) {
+        ResultVO resultVO;
+        try {
+            // 1 获取考试记录ID
+            Integer isDel = examService.deleteExamRecord(examRecordId);
+            resultVO = new ResultVO(0, "删除考试记录成功", isDel);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultVO = new ResultVO(-1, "删除考试记录失败", null);
         }
         return resultVO;
     }

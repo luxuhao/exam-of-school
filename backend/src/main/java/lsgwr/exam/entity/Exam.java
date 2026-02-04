@@ -38,6 +38,7 @@ public class Exam {
     private Integer examTimeLimit;
     private Integer examTypeId;
     private Integer examQuestionCategoryId;
+    private String examQuestionCategoryName;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date examStartDate;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
