@@ -69,14 +69,14 @@ export const asyncRouterMap = [
         component: PageView,
         redirect: '/list/exam-table-list',
         hideChildrenInMenu: true,
-        meta: { title: '考试管理', icon: examAdmin, permission: ['exam-table-list'] },
+        meta: { title: '试卷管理', icon: examAdmin, permission: ['exam-table-list'] },
         children: [
           {
             path: '/list/exam-table-list',
             name: 'ExamTableListWrapper',
             hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
             component: () => import('../views/list/ExamTableList'),
-            meta: { title: '考试列表', keepAlive: true, permission: ['exam-table-list'] }
+            meta: { title: '试卷列表', keepAlive: true, permission: ['exam-table-list'] }
           }
         ]
       },
@@ -86,13 +86,13 @@ export const asyncRouterMap = [
         redirect: '/list/exam-record-list',
         component: PageView,
         hideChildrenInMenu: true,
-        meta: { title: '我的考试', keepAlive: true, icon: 'user', permission: ['exam-record-list'] },
+        meta: { title: '考试记录', keepAlive: true, icon: 'user', permission: ['exam-record-list'] },
         children: [
           {
             path: '/list/exam-record-list',
             name: 'ExamRecordList',
             component: () => import('../views/list/ExamRecordList'),
-            meta: { title: '我参与过的考试列表', keepAlive: true, permission: ['exam-record-list'] }
+            meta: { title: '管理考试记录', keepAlive: true, permission: ['exam-record-list'] }
           }
         ]
       },

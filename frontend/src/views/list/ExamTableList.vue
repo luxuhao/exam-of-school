@@ -50,7 +50,7 @@ export default {
           title: '发布状态',
           field: 'state',
           formatter: (value, row) => {
-            return '<div class="exam-state">' + value + '</div>'
+             return '<div class="exam-state">' + value + '</div>'
           },
           events: {
             'click .exam-state': function (e, value, row, index) {
@@ -282,3 +282,6 @@ export default {
   }
 }
 </script>
+<style lang="less" scoped>
+  
+</style>

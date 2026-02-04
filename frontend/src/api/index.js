@@ -25,6 +25,7 @@ const api = {
   ExamQuestionTypeList: '/exam/question/type/list',
   ExamCreate: '/exam/create',
   ExamUpdate: '/exam/update',
+  ExamDelete: '/exam/delete/',
   ExamCardList: '/exam/card/list',
   // 获取考试详情
   ExamDetail: '/exam/detail/',
@@ -33,6 +34,7 @@ const api = {
   // 交卷
   FinishExam: '/exam/finish/',
   ExamRecordList: '/exam/record/list',
-  recordDetail: '/exam/record/detail/'
+  recordDetail: '/exam/record/detail/',
+  DeleteExamRecord: '/exam/record/delete/',
 }
 export default api

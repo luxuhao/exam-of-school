@@ -100,6 +100,17 @@ export function examUpdate (parameter) {
   })
 }
 
+export function examDelete (examId) {
+  console.log(parameter)
+  return axios({
+    url: api.ExamDelete + examId,
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  })
+}
+
 export function getExamDetail (examId) {
   return axios({
     url: api.ExamDetail + examId,
@@ -113,6 +124,16 @@ export function getExamDetail (examId) {
 export function getExamRecordDetail (recordId) {
   return axios({
     url: api.recordDetail + recordId,
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  })
+}
+
+export function DeleteExamRecord (recordId) {
+  return axios({
+    url: api.DeleteExamRecord + recordId,
     method: 'get',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8'
