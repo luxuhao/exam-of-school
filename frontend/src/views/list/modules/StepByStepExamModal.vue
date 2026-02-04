@@ -21,7 +21,7 @@
                 {{ categorie.name }}
               </a-select-option>
             </a-select>
-          </a-form-item>	
+          </a-form-item>
           <a-form-item label="教材" :labelCol="labelCol" :wrapperCol="wrapperCol">
             <a-select v-decorator="['grade', {rules: [{required: true}]}]" placeholder="请选择教材" style="width: 100%">
               <a-select-option v-for="grade in grades" :value="grade.id" :key="grade.id">
@@ -134,7 +134,6 @@
             :wrapperCol="wrapperCol"
             enterButton="Search"
           >
-           
             <a-select
               mode="multiple"
               :size="size"
@@ -187,7 +186,7 @@ import '../../../plugins/summernote'
 import $ from 'jquery'
 import { getExamQuestionTypeList, examCreate, getQuestionSelection } from '../../../api/exam'
 
-//添加表单获取的字段
+// 添加表单获取的字段
 const stepForms = [
   ['categorie', 'grade', 'name', 'elapse', 'desc'],
   ['radioScore', 'checkScore', 'judgeScore'],
@@ -213,7 +212,6 @@ export default {
       mdl: {},
       grades: [],
       categories: [],
-
       form: this.$form.createForm(this),
       // 单选题对象列表
       radios: [],
@@ -258,7 +256,7 @@ export default {
         if (res.code === 0) {
           console.log(res.data)
           this.radios = res.data.radios
-          //this.checks = res.data.checks
+          // this.checks = res.data.checks
           this.judges = res.data.judges
         } else {
           this.$notification.error({
@@ -301,7 +299,7 @@ export default {
       const { form: { validateFields } } = this
       const currentStep = step + 1
       console.log('当前步数:', currentStep)
-      if (currentStep == 1) {
+      if (currentStep === 1) {
         // stepForms
         validateFields(stepForms[0], (errors, values) => {
           if (!errors) {
@@ -309,14 +307,14 @@ export default {
             console.log('获取教材:', values.grade)
             this.radiosFilter = []
             this.judgesFilter = []
-            //1.先插入学科 2.再过滤教材
+            // 1.先插入学科 2.再过滤教材
             for (let i = 0; i < this.radios.length; i++) {
-              if(this.radios[i].category === values.categorie && this.radios[i].grade === values.grade){
+              if (this.radios[i].category === values.categorie && this.radios[i].grade === values.grade) {
                 this.radiosFilter.push(this.radios[i])
               }
             }
             for (let i = 0; i < this.judges.length; i++) {
-              if(this.judges[i].category === values.categorie && this.judges[i].grade === values.grade){
+              if (this.judges[i].category === values.categorie && this.judges[i].grade === values.grade) {
                 this.judgesFilter.push(this.judges[i])
               }
             }
@@ -450,8 +448,7 @@ export default {
           this.judgesFilter[i].checked = false
         }
       }
-    },
-    
+    }
   }
 }
 </script>

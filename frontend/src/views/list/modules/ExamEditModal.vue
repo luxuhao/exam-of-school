@@ -60,7 +60,6 @@
           </a-form-item>
           <!-- 多选
           <a-form-item label="选择多选题" :labelCol="labelCol" :wrapperCol="wrapperCol" enterButton="Search">
-            
             <a-select
               mode="multiple"
               :size="size"
@@ -183,18 +182,19 @@ export default {
         }
         console.log(res.data)
         that.radios = res.data.radios.filter((item, index) => {
-          return item.category === this.examCategoryId && item.grade === this.gradeVolumeId;
-        });
-        //that.checks = res.data.checks
+          return item.category === this.examCategoryId && item.grade === this.gradeVolumeId
+        })
+        // that.checks = res.data.checks
         that.judges = res.data.judges.filter((item, index) => {
-          return item.category === this.examCategoryId && item.grade === this.gradeVolumeId;
-        });
+          return item.category === this.examCategoryId && item.grade === this.gradeVolumeId
+        })
         // 从exam里面的radios、checks、judges设置下上面的this里面的三个属性，把checked属性设置为true
         for (let i = 0; i < exam.radios.length; i++) { // 遍历所有的题目的选项
           that.defaultRadios.push(exam.radios[i].name)
         }
         that.handleRadioChange(that.defaultRadios)
-/*        for (let i = 0; i < exam.checks.length; i++) { // 遍历所有的题目的选项
+        /*
+        for (let i = 0; i < exam.checks.length; i++) { // 遍历所有的题目的选项
           that.defaultChecks.push(exam.checks[i].name)
         }
         that.handleCheckChange(that.defaultChecks) */

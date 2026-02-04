@@ -36,9 +36,9 @@ export default {
   },
   methods: {
     joinExam (id, submitted) {
-      if (submitted){
-        console.log('该考试已提交，无法再次点击');
-        return;
+      if (submitted) {
+        console.log('该考试已提交，无法再次点击')
+        return
       }
       const routeUrl = this.$router.resolve({
         path: `/exam/${id}`

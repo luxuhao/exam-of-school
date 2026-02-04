@@ -46,9 +46,9 @@
 
       <a-form-item>
         <a-checkbox v-decorator="['rememberMe']">自动登录</a-checkbox>
-		<!-- 先隐藏注册
+        <!-- 先隐藏注册
         <router-link class="register" :to="{ name: 'register' }" style="float: right;">注册账户</router-link>
-		-->
+        -->
       </a-form-item>
 
       <a-form-item style="margin-top:24px">

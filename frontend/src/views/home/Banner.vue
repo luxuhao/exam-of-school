@@ -9,13 +9,13 @@
         <span>综合学科在线考试系统</span>
       </p>
       <div class="button-wrapper">
-        <!--        
+        <!--
         <a href="https://github.com/19920625lsg">
               <a-button type="primary">预览</a-button>
             </a>
             <a @click="$router.push({ name: 'docs' })">
               <a-button style="margin: 0 16px;">开始使用</a-button>
-            </a> 
+            </a>
         -->
       </div>
     </div>

@@ -17,7 +17,6 @@
           </a-form-item>
         </div>
         <div v-show="currentStep === 1">
-          
           <a-form-item label="教材" :labelCol="labelCol" :wrapperCol="wrapperCol">
             <a-select v-decorator="['grade', {rules: [{required: true}]}]" placeholder="请选择教材" style="width: 100%">
               <a-select-option v-for="grade in grades" :value="grade.id" :key="grade.id">
@@ -25,7 +24,6 @@
               </a-select-option>
             </a-select>
           </a-form-item>
-          
           <a-form-item label="题型" :labelCol="labelCol" :wrapperCol="wrapperCol">
             <a-select v-decorator="['type', {rules: [{required: true}]}]" placeholder="请选择题型" style="width: 100%">
               <a-select-option v-for="typeObj in types" :value="typeObj.id" :key="typeObj.id">

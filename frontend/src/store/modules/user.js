@@ -9,7 +9,7 @@ const user = {
     name: '',
     welcome: '',
     avatar: '',
-    gradeLevelName:'',
+    gradeLevelName: '',
     roles: [],
     info: {}
   },

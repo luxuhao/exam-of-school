@@ -29,7 +29,7 @@
               题目{{ index + 1 }}
             </a-menu-item>
           </a-sub-menu>
-		  <!--
+          <!--
           <a-sub-menu key="question_check">
             <span slot="title" v-if="examDetail.exam"><a-icon type="check-square" theme="twoTone"/>多选题(每题{{ examDetail.exam.examScoreCheck }}分)</span>
             <a-menu-item v-for="(item, index) in examDetail.checkIds" :key="item" @click="getQuestionDetail(item)">
@@ -37,7 +37,7 @@
               题目{{ index + 1 }}
             </a-menu-item>
           </a-sub-menu>
-		  -->
+          -->
           <a-sub-menu key="question_judge">
             <span slot="title" v-if="examDetail.exam"><a-icon type="like" theme="twoTone"/>判断题(每题{{ examDetail.exam.examScoreJudge }}分)</span>
             <a-menu-item v-for="(item, index) in examDetail.judgeIds" :key="item" @click="getQuestionDetail(item)">
@@ -58,8 +58,7 @@
                 {{ option.questionOptionContent }}
               </a-radio>
             </a-radio-group>
-
-            <!-- 多选题 
+            <!--
             <a-checkbox-group @change="onCheckChange" v-model="checkValues" v-if="currentQuestion.type === '多选题'">
               <a-checkbox v-for="option in currentQuestion.options" :key="option.questionOptionId" :style="optionStyle" :value="option.questionOptionId">
                 {{ option.questionOptionContent }}
@@ -200,7 +199,7 @@ export default {
             this.$notification.success({
               message: '考卷提交成功！'
             })
-            //this.$router.push('/list/exam-record-list')
+            // this.$router.push('/list/exam-record-list')
             this.$router.push('/list/exam-card')
             return res.data
           } else {
