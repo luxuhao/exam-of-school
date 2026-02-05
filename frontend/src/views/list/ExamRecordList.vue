@@ -1,23 +1,34 @@
 <template>
   <div>
-    <a-card style="margin-top: 24px" :bordered="false" title="考试记录信息">
-      <div slot="extra">
+    <!-- <a-card style="margin-top: 24px" :bordered="false" title="考试记录信息"> 
+            <div id="toolbar" slot="extra">-->
+    <a-card :bordered="false">
+      <div id="toolbar">
         <!-- <a-cascader v-model:value="value" :options="cascaderOptions" /> -->
-          <a-space>
-            <a-select
-              v-model:value="province"
-              style="width: 120px"
-              :options="cascaderOptions"
-            >
-            </a-select>
-            <a-select
-              v-model:value="secondCity"
-              style="width: 120px"
-              :options="cascaderOptions"
-            >
-            </a-select>
-          </a-space>
-        <a-input-search style="margin-left: 16px; width: 272px;"/>
+        <a-select
+          v-model:value="categoryOptions.value"
+          style="width: 120px"
+          placeholder="请选择学科"
+          :options="categoryOptions"
+        >
+        </a-select>&nbsp;
+        <a-select
+          v-model:value="gradeLevelOptions.value"
+          style="width: 120px"
+          placeholder="请选择教材"
+          :options="gradeLevelOptions"
+        >
+        </a-select>&nbsp;
+        <a-select
+          v-model:value="userClassOptions.value"
+          style="width: 120px"
+          placeholder="请选择班级"
+          :options="userClassOptions"
+        >
+        </a-select>&nbsp;
+        <a-button type="primary" @click="queryBy()">查询</a-button>&nbsp;
+        <a-button type="primary" icon="reload" @click="loadAll()">重置查询</a-button>
+        <!-- <a-input-search style="margin-left: 16px; width: 272px;"/> -->
       </div>
       <BootstrapTable
         ref="table"
@@ -60,7 +71,7 @@
 
 <script>
 import HeadInfo from '../../components/tools/HeadInfo'
-import { getExamRecordList, DeleteExamRecord } from '../../api/exam'
+import { getExamRecordList, DeleteExamRecord, getQuestionSelection } from '../../api/exam'
 import '../../plugins/bootstrap-table'
 import $ from 'jquery'
 export default {
@@ -169,18 +180,9 @@ export default {
         // onClickCell: that.clickCell, // 单元格单击事件
         onDblClickCell: that.dblClickCell// 单元格双击事件
       },
-      cascaderOptions: [
-       {
-         value: 'zhejiang',
-         label: 'Zhejiang',
-         isLeaf: false,
-       },
-       {
-         value: 'jiangsu',
-         label: 'Jiangsu',
-         isLeaf: false,
-       },
-      ]
+      categoryOptions: [],
+      gradeLevelOptions: [],
+      userClassOptions: []
     }
   },
   methods: {
@@ -233,6 +235,46 @@ export default {
       // 失败就弹出警告消息
       this.$notification.error({
         message: '获取考试记录失败',
+        description: err.message
+      })
+    })
+    // 从后端数据获取各个查询条件的列表
+    getQuestionSelection().then(res => {
+      this.categoryOptions = []
+      this.gradeLevelOptions = []
+      this.userClassOptions = []
+      if (res.code === 0) {
+        // 第一个查询条件 按学科
+        res.data.categories.forEach(item => {
+          this.categoryOptions.push({
+            value: item.id,
+            label: item.name
+          })
+        })
+        // 第二个查询条件 按教材
+        res.data.grades.forEach(item => {
+          this.gradeLevelOptions.push({
+            value: item.id,
+            label: item.name
+          })
+        })
+        // 第三个查询条件 按班级
+        res.data.userClass.forEach(item => {
+          this.userClassOptions.push({
+            value: item.id,
+            label: item.name
+          })
+        })
+      } else {
+        this.$notification.error({
+          message: '获取查询条件失败',
+          description: res.msg
+        })
+      }
+    }).catch(err => {
+      // 失败就弹出警告消息
+      this.$notification.error({
+        message: '获取查询条件失败',
         description: err.message
       })
     })

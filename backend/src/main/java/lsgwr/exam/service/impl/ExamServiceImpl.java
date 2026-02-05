@@ -43,7 +43,9 @@ public class ExamServiceImpl implements ExamService {
 
     private final ExamTypeRepository examTypeRepository;
 
-    public ExamServiceImpl(QuestionRepository questionRepository, UserRepository userRepository, QuestionLevelRepository questionLevelRepository, QuestionTypeRepository questionTypeRepository, QuestionCategoryRepository questionCategoryRepository, QuestionOptionRepository questionOptionRepository, ExamRepository examRepository, ExamRecordRepository examRecordRepository, GradeVolumeRepository gradeVolumeRepository, ExamTypeRepository examTypeRepository) {
+    private final UserClassRepository userClassRepository;
+
+    public ExamServiceImpl(QuestionRepository questionRepository, UserRepository userRepository, QuestionLevelRepository questionLevelRepository, QuestionTypeRepository questionTypeRepository, QuestionCategoryRepository questionCategoryRepository, QuestionOptionRepository questionOptionRepository, ExamRepository examRepository, ExamRecordRepository examRecordRepository, GradeVolumeRepository gradeVolumeRepository, ExamTypeRepository examTypeRepository, UserClassRepository userClassRepository) {
         this.questionRepository = questionRepository;
         this.userRepository = userRepository;
         this.questionLevelRepository = questionLevelRepository;
@@ -54,6 +56,7 @@ public class ExamServiceImpl implements ExamService {
         this.examRecordRepository = examRecordRepository;
         this.gradeVolumeRepository = gradeVolumeRepository;
         this.examTypeRepository = examTypeRepository;
+        this.userClassRepository = userClassRepository;
     }
 
     @Override
@@ -244,6 +247,7 @@ public class ExamServiceImpl implements ExamService {
         questionSelectionVo.setQuestionTypeList(questionTypeRepository.findAll());
         questionSelectionVo.setGradeVolumeList(gradeVolumeRepository.findAll());
         questionSelectionVo.setStatesTypeList(examTypeRepository.findAll());
+        questionSelectionVo.setUserClassList(userClassRepository.findAll());
         return questionSelectionVo;
     }
 

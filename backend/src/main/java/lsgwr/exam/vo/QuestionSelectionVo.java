@@ -29,4 +29,7 @@ public class QuestionSelectionVo {
     @JsonProperty("states")
     private List<ExamType> statesTypeList;
 
+    @JsonProperty("userClass")
+    private List<UserClass> userClassList;
+
 }

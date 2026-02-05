@@ -11,7 +11,7 @@
  Target Server Version : 80408
  File Encoding         : 65001
 
- Date: 03/02/2026 20:06:11
+ Date: 05/02/2026 10:54:51
 */
 
 SET NAMES utf8mb4;
@@ -28,7 +28,7 @@ CREATE TABLE `action`  (
   `default_check` tinyint(1) NOT NULL DEFAULT 0 COMMENT '当前操作是否需要校验,true为1,0为false',
   PRIMARY KEY (`action_id`) USING BTREE,
   UNIQUE INDEX `action_name`(`action_name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '前端操作比如增删改查等的权限表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '前端操作比如增删改查等的权限表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of action
@@ -67,16 +67,19 @@ CREATE TABLE `exam`  (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `exam_type_id` int NULL DEFAULT NULL COMMENT '该考试状态主键',
   `exam_question_category_id` int NULL DEFAULT NULL COMMENT '该考试所属学科',
+  `exam_question_category_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL COMMENT '该考试所属学科名称',
   PRIMARY KEY (`exam_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '考试的详细信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of exam
 -- ----------------------------
-INSERT INTO `exam` VALUES ('1b973a05369a4cc99045b3c537447d9b', '2025年测试', '<p><br></p>', 8, '22', '9f9cd4e079f946c5bc6e33d68620295f-', '9f9cd4e079f946c5bc6e33d68620295f', NULL, '', 5, 5, NULL, 5, '3', 20, '2026-02-03 15:53:56', '2026-02-03 15:53:56', '2026-02-03 15:53:56', '2026-02-03 19:15:03', 2, 1);
-INSERT INTO `exam` VALUES ('40fb07a302c04154bb564f9591bb5594', '2025年测试', '<p><br></p>', 8, '25', '9f9cd4e079f946c5bc6e33d68620295f-144bf174dbff40e4910918e8a0297339', '9f9cd4e079f946c5bc6e33d68620295f', NULL, '144bf174dbff40e4910918e8a0297339', 10, 5, NULL, 5, '3', 90, '2026-02-03 15:58:31', '2026-02-03 15:58:31', '2026-02-03 15:58:31', '2026-02-03 16:54:37', 2, 1);
-INSERT INTO `exam` VALUES ('4af7ae9fa2874a0d9ae6acbe9f0ff30d', '2025年测试', '<p><br></p>', 8, '25', '9f9cd4e079f946c5bc6e33d68620295f-', '9f9cd4e079f946c5bc6e33d68620295f', NULL, '', 5, 5, NULL, 5, '3', 90, '2026-02-03 15:58:20', '2026-02-03 15:58:20', '2026-02-03 15:58:20', '2026-02-03 15:58:20', 1, 1);
-INSERT INTO `exam` VALUES ('d805dad6b52140c1ba320cc09bf289ad', '2025年测试', '<p><br></p>', 7, '瑞特', '5a211e43b0fc4f7eb041f1c6880e466e-', '5a211e43b0fc4f7eb041f1c6880e466e', NULL, '', 5, 5, NULL, 5, '3', 90, '2026-02-03 15:44:16', '2026-02-03 15:44:16', '2026-02-03 15:44:16', '2026-02-03 15:51:56', 1, 1);
+INSERT INTO `exam` VALUES ('1b973a05369a4cc99045b3c537447d9b', '2025年测试', '<p><br></p>', 8, '22', '9f9cd4e079f946c5bc6e33d68620295f-f265a8e6688c4df8bd11629c4c89a732-144bf174dbff40e4910918e8a0297339-59e1aab1712148c9ae0095f421c01309', '9f9cd4e079f946c5bc6e33d68620295f-f265a8e6688c4df8bd11629c4c89a732', NULL, '144bf174dbff40e4910918e8a0297339-59e1aab1712148c9ae0095f421c01309', 20, 5, NULL, 5, '3', 20, '2026-02-03 15:53:56', '2026-02-03 15:53:56', '2026-02-03 15:53:56', '2026-02-04 20:54:25', 2, 1, '信息科技');
+INSERT INTO `exam` VALUES ('40fb07a302c04154bb564f9591bb5594', '2025年测试', '<p><br></p>', 2, '25', '-', '', NULL, '', 0, 5, NULL, 5, '3', 90, '2026-02-03 15:58:31', '2026-02-03 15:58:31', '2026-02-03 15:58:31', '2026-02-04 20:50:22', 1, 1, '信息科技');
+INSERT INTO `exam` VALUES ('4af7ae9fa2874a0d9ae6acbe9f0ff30d', '2025年测试', '<p><br></p>', 8, '25', '9f9cd4e079f946c5bc6e33d68620295f-f265a8e6688c4df8bd11629c4c89a732-144bf174dbff40e4910918e8a0297339-59e1aab1712148c9ae0095f421c01309', '9f9cd4e079f946c5bc6e33d68620295f-f265a8e6688c4df8bd11629c4c89a732', NULL, '144bf174dbff40e4910918e8a0297339-59e1aab1712148c9ae0095f421c01309', 20, 5, NULL, 5, '3', 90, '2026-02-03 15:58:20', '2026-02-03 15:58:20', '2026-02-03 15:58:20', '2026-02-04 20:50:20', 3, 1, '信息科技');
+INSERT INTO `exam` VALUES ('4f67eb6eb0bb4a7487fc449171328471', '信息科技', '<p><br></p>', 8, '2', '-144bf174dbff40e4910918e8a0297339-59e1aab1712148c9ae0095f421c01309', '', NULL, '144bf174dbff40e4910918e8a0297339-59e1aab1712148c9ae0095f421c01309', 10, 5, NULL, 5, '3', 20, '2026-02-04 20:07:52', '2026-02-04 20:07:52', '2026-02-04 20:07:52', '2026-02-04 20:50:17', 1, 1, '信息科技');
+INSERT INTO `exam` VALUES ('d805dad6b52140c1ba320cc09bf289ad', '2025年测试', '<p><br></p>', 7, '瑞特', '5a211e43b0fc4f7eb041f1c6880e466e-', '5a211e43b0fc4f7eb041f1c6880e466e', NULL, '', 5, 5, NULL, 5, '3', 90, '2026-02-03 15:44:16', '2026-02-03 15:44:16', '2026-02-03 15:44:16', '2026-02-04 20:09:40', 1, 1, '信息科技');
+INSERT INTO `exam` VALUES ('e743f3f2b14a4608bea32a6bbd499071', '体育十分士大夫', '<p><br></p>', 8, '2', '9f9cd4e079f946c5bc6e33d68620295f-f265a8e6688c4df8bd11629c4c89a732-144bf174dbff40e4910918e8a0297339', '9f9cd4e079f946c5bc6e33d68620295f-f265a8e6688c4df8bd11629c4c89a732', NULL, '144bf174dbff40e4910918e8a0297339', 15, 5, NULL, 5, '3', 20, '2026-02-04 20:03:58', '2026-02-04 20:03:58', '2026-02-04 20:03:58', '2026-02-04 20:09:42', 1, 1, '信息科技');
 
 -- ----------------------------
 -- Table structure for exam_record
@@ -97,9 +100,7 @@ CREATE TABLE `exam_record`  (
 -- ----------------------------
 -- Records of exam_record
 -- ----------------------------
-INSERT INTO `exam_record` VALUES ('0b20d190a7394c1287589065b1b280f8', '4', '2026-02-03 17:00:15', NULL, 0, NULL, '144bf174dbff40e4910918e8a0297339@False_0c84782421104993b6ed86aed8f0657f$9f9cd4e079f946c5bc6e33d68620295f@False_72c1b9ca9f8d43b5bbab1f5206b984e5', '40fb07a302c04154bb564f9591bb5594');
-INSERT INTO `exam_record` VALUES ('3c842cd046f14bfc9a03e915420a176c', '3', '2026-02-03 16:54:54', NULL, 0, NULL, '144bf174dbff40e4910918e8a0297339@False_0c84782421104993b6ed86aed8f0657f$9f9cd4e079f946c5bc6e33d68620295f@False_72c1b9ca9f8d43b5bbab1f5206b984e5', '40fb07a302c04154bb564f9591bb5594');
-INSERT INTO `exam_record` VALUES ('7685ef6d265043c98bb16ae142fafc6a', '4', '2026-02-03 19:16:24', NULL, 0, NULL, '9f9cd4e079f946c5bc6e33d68620295f@False_72c1b9ca9f8d43b5bbab1f5206b984e5', '1b973a05369a4cc99045b3c537447d9b');
+INSERT INTO `exam_record` VALUES ('73c766866b7c454d92da97d81232cf44', '4', '2026-02-04 20:52:03', NULL, 5, NULL, 'f265a8e6688c4df8bd11629c4c89a732@False_6d57d11c75c8476084bbbf6659f09342$144bf174dbff40e4910918e8a0297339@False_0c84782421104993b6ed86aed8f0657f$9f9cd4e079f946c5bc6e33d68620295f@False_72c1b9ca9f8d43b5bbab1f5206b984e5$59e1aab1712148c9ae0095f421c01309@True_65f7f623cc514db9864af72cd1123520', '1b973a05369a4cc99045b3c537447d9b');
 
 -- ----------------------------
 -- Table structure for exam_record_level
@@ -110,7 +111,7 @@ CREATE TABLE `exam_record_level`  (
   `exam_record_level_name` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL COMMENT '考试结果等级的名称',
   `exam_record_level_description` varchar(512) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL COMMENT '考试结果等级的详细阐述',
   PRIMARY KEY (`exam_record_level_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '考试结果的等级' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '考试结果的等级' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of exam_record_level
@@ -135,8 +136,9 @@ CREATE TABLE `exam_type`  (
 -- ----------------------------
 -- Records of exam_type
 -- ----------------------------
-INSERT INTO `exam_type` VALUES (1, '停用', NULL);
+INSERT INTO `exam_type` VALUES (1, '待启用', NULL);
 INSERT INTO `exam_type` VALUES (2, '已发布', NULL);
+INSERT INTO `exam_type` VALUES (3, '已作废', NULL);
 
 -- ----------------------------
 -- Table structure for grade_level
@@ -147,7 +149,7 @@ CREATE TABLE `grade_level`  (
   `grade_level_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '年段的名字',
   `grade_level_description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '年段的描述',
   PRIMARY KEY (`grade_level_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of grade_level
@@ -169,7 +171,7 @@ CREATE TABLE `grade_volume`  (
   `grade_volume_description` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL COMMENT '题目上下册的描述',
   `grade_level_id` int NULL DEFAULT NULL COMMENT '所属年段ID',
   PRIMARY KEY (`grade_volume_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '问题的上下册' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '问题的上下册' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of grade_volume
@@ -228,6 +230,7 @@ INSERT INTO `page` VALUES (3, 'exam-record-list', '考试记录', '1-6-3-4');
 INSERT INTO `page` VALUES (4, 'question-admin', '问题管理', '1-6-3-4');
 INSERT INTO `page` VALUES (5, 'exam-table-list', '考试管理', '1-6-3-4');
 INSERT INTO `page` VALUES (6, 'user', '个人页', '1-6-3-4-5-7');
+INSERT INTO `page` VALUES (7, 'exam-analysis', '考试分析', '1-6-3-4');
 
 -- ----------------------------
 -- Table structure for question
@@ -270,7 +273,7 @@ CREATE TABLE `question_category`  (
   `question_category_name` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL COMMENT '问题类别名称',
   `question_category_description` varchar(512) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL COMMENT '问题类别的描述',
   PRIMARY KEY (`question_category_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '题目类别表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '题目类别表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of question_category
@@ -289,7 +292,7 @@ CREATE TABLE `question_level`  (
   `question_level_name` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL COMMENT '题目难易度名称',
   `question_level_description` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL COMMENT '题目难易度的描述',
   PRIMARY KEY (`question_level_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '问题的难易度级别' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '问题的难易度级别' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of question_level
@@ -336,7 +339,7 @@ CREATE TABLE `question_type`  (
   `question_type_name` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL COMMENT '题目类型名称',
   `question_type_description` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL COMMENT '题目类型的描述',
   PRIMARY KEY (`question_type_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '问题类型' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '问题类型' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of question_type
@@ -355,7 +358,7 @@ CREATE TABLE `role`  (
   `role_detail` varchar(256) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL COMMENT '角色的详细功能阐述',
   `role_page_ids` varchar(256) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL COMMENT '当前角色所能访问的页面的id集合',
   PRIMARY KEY (`role_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '用户角色表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '用户角色表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of role
@@ -387,7 +390,7 @@ CREATE TABLE `user`  (
   UNIQUE INDEX `user_username`(`user_username`) USING BTREE,
   UNIQUE INDEX `user_email`(`user_email`) USING BTREE,
   UNIQUE INDEX `user_phone`(`user_phone`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
@@ -407,7 +410,7 @@ CREATE TABLE `user_class`  (
   `class_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '班级名称',
   `class_description` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '班级描述',
   PRIMARY KEY (`class_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_class
