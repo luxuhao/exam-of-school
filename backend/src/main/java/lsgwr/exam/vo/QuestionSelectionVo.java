@@ -32,4 +32,7 @@ public class QuestionSelectionVo {
     @JsonProperty("userClass")
     private List<UserClass> userClassList;
 
+    @JsonProperty("gradeLevel")
+    private List<GradeLevel> gradeLevelList;
+
 }

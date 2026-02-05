@@ -45,7 +45,9 @@ public class ExamServiceImpl implements ExamService {
 
     private final UserClassRepository userClassRepository;
 
-    public ExamServiceImpl(QuestionRepository questionRepository, UserRepository userRepository, QuestionLevelRepository questionLevelRepository, QuestionTypeRepository questionTypeRepository, QuestionCategoryRepository questionCategoryRepository, QuestionOptionRepository questionOptionRepository, ExamRepository examRepository, ExamRecordRepository examRecordRepository, GradeVolumeRepository gradeVolumeRepository, ExamTypeRepository examTypeRepository, UserClassRepository userClassRepository) {
+    private final GradeLevelRepository gradeLevelRepository;
+
+    public ExamServiceImpl(QuestionRepository questionRepository, UserRepository userRepository, QuestionLevelRepository questionLevelRepository, QuestionTypeRepository questionTypeRepository, QuestionCategoryRepository questionCategoryRepository, QuestionOptionRepository questionOptionRepository, ExamRepository examRepository, ExamRecordRepository examRecordRepository, GradeVolumeRepository gradeVolumeRepository, ExamTypeRepository examTypeRepository, UserClassRepository userClassRepository, GradeLevelRepository gradeLevelRepository) {
         this.questionRepository = questionRepository;
         this.userRepository = userRepository;
         this.questionLevelRepository = questionLevelRepository;
@@ -57,6 +59,7 @@ public class ExamServiceImpl implements ExamService {
         this.gradeVolumeRepository = gradeVolumeRepository;
         this.examTypeRepository = examTypeRepository;
         this.userClassRepository = userClassRepository;
+        this.gradeLevelRepository = gradeLevelRepository;
     }
 
     @Override
@@ -248,6 +251,7 @@ public class ExamServiceImpl implements ExamService {
         questionSelectionVo.setGradeVolumeList(gradeVolumeRepository.findAll());
         questionSelectionVo.setStatesTypeList(examTypeRepository.findAll());
         questionSelectionVo.setUserClassList(userClassRepository.findAll());
+        questionSelectionVo.setGradeLevelList(gradeLevelRepository.findAll());
         return questionSelectionVo;
     }
 

@@ -10,13 +10,15 @@
           style="width: 120px"
           placeholder="请选择学科"
           :options="categoryOptions"
+          @change="onCategoryChange"
         >
         </a-select>&nbsp;
         <a-select
           v-model:value="gradeLevelOptions.value"
           style="width: 120px"
-          placeholder="请选择教材"
+          placeholder="请选择年段"
           :options="gradeLevelOptions"
+          @change="onGradeChange"
         >
         </a-select>&nbsp;
         <a-select
@@ -24,9 +26,10 @@
           style="width: 120px"
           placeholder="请选择班级"
           :options="userClassOptions"
+          @change="onClassChange"
         >
         </a-select>&nbsp;
-        <a-button type="primary" @click="queryBy()">查询</a-button>&nbsp;
+        <a-button type="primary" @click="queryBy()">查询</a-button>&nbsp;&nbsp;
         <a-button type="primary" icon="reload" @click="loadAll()">重置查询</a-button>
         <!-- <a-input-search style="margin-left: 16px; width: 272px;"/> -->
       </div>
@@ -165,6 +168,7 @@ export default {
         
       ],
       tableData: [], // bootstrap-table的数据
+      tableDataQueryTemp: [], // 查询临时数据的数据
       // custom bootstrap-table
       options: {
         search: true,
@@ -182,7 +186,19 @@ export default {
       },
       categoryOptions: [],
       gradeLevelOptions: [],
-      userClassOptions: []
+      userClassOptions: [],
+      categoryOptionValue: {
+        value: 0,
+        name: 'categoryOptionValue'
+      },
+      gradeLevelOptionValue: {
+        value: 0,
+        name: 'gradeLevelOptionValue'
+      },
+      userClassOptionValue: {
+        value: 0,
+        name: 'userClassOptionValue'
+      }            
     }
   },
   methods: {
@@ -217,13 +233,13 @@ export default {
           description: err.message
         })
       })
-      
     },
   loadAll () {
     // 从后端数据获取考试列表，适配前端卡片
     getExamRecordList().then(res => {
       if (res.code === 0) {
         this.tableData = res.data
+        this.tableDataQueryTemp = res.data
         this.$refs.table._initTable()
       } else {
         this.$notification.error({
@@ -251,11 +267,11 @@ export default {
             label: item.name
           })
         })
-        // 第二个查询条件 按教材
-        res.data.grades.forEach(item => {
+        // 第二个查询条件 按年段
+        res.data.gradeLevel.forEach(item => {
           this.gradeLevelOptions.push({
-            value: item.id,
-            label: item.name
+            value: item.gradeLevelId,
+            label: item.gradeLevelDescription
           })
         })
         // 第三个查询条件 按班级
@@ -279,6 +295,38 @@ export default {
       })
     })
   },
+  // 按动态条件过滤
+  queryBy () {
+      this.tableData = this.tableDataQueryTemp
+      this.tableData = this.tableData.filter((item, index) => {
+        let match = true
+          // 学科条件过滤
+          if (this.categoryOptionValue.value) {
+            match = match && item.exam.examQuestionCategoryId === this.categoryOptionValue.value;
+          }
+          // 年段条件过滤
+          if (this.gradeLevelOptionValue.value) {
+            match = match && item.user.userGradeLevelId === this.gradeLevelOptionValue.value;
+          }
+          // 班级条件过滤
+          if (this.userClassOptionValue.value) {
+            match = match && item.user.userClassId === this.userClassOptionValue.value;
+          }
+          return match
+      })
+  },
+  onCategoryChange (value) {
+    this.categoryOptionValue.value = value
+    //console.log('学科选择:', value);
+  },
+  onGradeChange (value) {
+    this.gradeLevelOptionValue.value = value
+    // console.log('年段选择:', value);
+  },
+  onClassChange (value) {
+    this.userClassOptionValue.value = value
+    // console.log('班级选择:', value);
+  }
   },
   mounted () {
     this.loadAll() // 加载所有问题的数据
