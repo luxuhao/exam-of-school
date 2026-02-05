@@ -11,7 +11,7 @@
  Target Server Version : 80408
  File Encoding         : 65001
 
- Date: 05/02/2026 10:54:51
+ Date: 05/02/2026 17:24:24
 */
 
 SET NAMES utf8mb4;
@@ -78,6 +78,7 @@ INSERT INTO `exam` VALUES ('1b973a05369a4cc99045b3c537447d9b', '2025年测试', 
 INSERT INTO `exam` VALUES ('40fb07a302c04154bb564f9591bb5594', '2025年测试', '<p><br></p>', 2, '25', '-', '', NULL, '', 0, 5, NULL, 5, '3', 90, '2026-02-03 15:58:31', '2026-02-03 15:58:31', '2026-02-03 15:58:31', '2026-02-04 20:50:22', 1, 1, '信息科技');
 INSERT INTO `exam` VALUES ('4af7ae9fa2874a0d9ae6acbe9f0ff30d', '2025年测试', '<p><br></p>', 8, '25', '9f9cd4e079f946c5bc6e33d68620295f-f265a8e6688c4df8bd11629c4c89a732-144bf174dbff40e4910918e8a0297339-59e1aab1712148c9ae0095f421c01309', '9f9cd4e079f946c5bc6e33d68620295f-f265a8e6688c4df8bd11629c4c89a732', NULL, '144bf174dbff40e4910918e8a0297339-59e1aab1712148c9ae0095f421c01309', 20, 5, NULL, 5, '3', 90, '2026-02-03 15:58:20', '2026-02-03 15:58:20', '2026-02-03 15:58:20', '2026-02-04 20:50:20', 3, 1, '信息科技');
 INSERT INTO `exam` VALUES ('4f67eb6eb0bb4a7487fc449171328471', '信息科技', '<p><br></p>', 8, '2', '-144bf174dbff40e4910918e8a0297339-59e1aab1712148c9ae0095f421c01309', '', NULL, '144bf174dbff40e4910918e8a0297339-59e1aab1712148c9ae0095f421c01309', 10, 5, NULL, 5, '3', 20, '2026-02-04 20:07:52', '2026-02-04 20:07:52', '2026-02-04 20:07:52', '2026-02-04 20:50:17', 1, 1, '信息科技');
+INSERT INTO `exam` VALUES ('911aa51298f349249624ec14c59d62b2', '体育十分士大夫', '<p><br></p>', 8, 'sfs', '01de6c50a19a4946bac1749141db863b-', '01de6c50a19a4946bac1749141db863b', NULL, '', 5, 5, NULL, 5, '3', 20, '2026-02-05 15:46:55', '2026-02-05 15:46:55', '2026-02-05 15:46:55', '2026-02-05 15:47:16', 2, 3, '体育');
 INSERT INTO `exam` VALUES ('d805dad6b52140c1ba320cc09bf289ad', '2025年测试', '<p><br></p>', 7, '瑞特', '5a211e43b0fc4f7eb041f1c6880e466e-', '5a211e43b0fc4f7eb041f1c6880e466e', NULL, '', 5, 5, NULL, 5, '3', 90, '2026-02-03 15:44:16', '2026-02-03 15:44:16', '2026-02-03 15:44:16', '2026-02-04 20:09:40', 1, 1, '信息科技');
 INSERT INTO `exam` VALUES ('e743f3f2b14a4608bea32a6bbd499071', '体育十分士大夫', '<p><br></p>', 8, '2', '9f9cd4e079f946c5bc6e33d68620295f-f265a8e6688c4df8bd11629c4c89a732-144bf174dbff40e4910918e8a0297339', '9f9cd4e079f946c5bc6e33d68620295f-f265a8e6688c4df8bd11629c4c89a732', NULL, '144bf174dbff40e4910918e8a0297339', 15, 5, NULL, 5, '3', 20, '2026-02-04 20:03:58', '2026-02-04 20:03:58', '2026-02-04 20:03:58', '2026-02-04 20:09:42', 1, 1, '信息科技');
 
@@ -100,6 +101,7 @@ CREATE TABLE `exam_record`  (
 -- ----------------------------
 -- Records of exam_record
 -- ----------------------------
+INSERT INTO `exam_record` VALUES ('0905a7b8701f4be4b027101517f7da88', '4', '2026-02-05 15:47:29', NULL, 5, NULL, '01de6c50a19a4946bac1749141db863b@True_9af6202e4d6f42a8a626a59c38bdf39f', '911aa51298f349249624ec14c59d62b2');
 INSERT INTO `exam_record` VALUES ('73c766866b7c454d92da97d81232cf44', '4', '2026-02-04 20:52:03', NULL, 5, NULL, 'f265a8e6688c4df8bd11629c4c89a732@False_6d57d11c75c8476084bbbf6659f09342$144bf174dbff40e4910918e8a0297339@False_0c84782421104993b6ed86aed8f0657f$9f9cd4e079f946c5bc6e33d68620295f@False_72c1b9ca9f8d43b5bbab1f5206b984e5$59e1aab1712148c9ae0095f421c01309@True_65f7f623cc514db9864af72cd1123520', '1b973a05369a4cc99045b3c537447d9b');
 
 -- ----------------------------
@@ -256,6 +258,7 @@ CREATE TABLE `question`  (
 -- ----------------------------
 -- Records of question
 -- ----------------------------
+INSERT INTO `question` VALUES ('01de6c50a19a4946bac1749141db863b', '<p>跳远能跳多少</p>', 5, '3', 8, 3, 1, 3, '<p><br></p>', '9af6202e4d6f42a8a626a59c38bdf39f-dfc51352d05842218f8c6bf3cf1d70e2', '9af6202e4d6f42a8a626a59c38bdf39f', '2026-02-05 15:46:40', '2026-02-05 15:46:40');
 INSERT INTO `question` VALUES ('144bf174dbff40e4910918e8a0297339', '计算机计算1+1等于2对吗', 5, '3', 8, 2, 3, 1, '<p><br></p>', '2b0d54493b724750bc1d8ff3c8200619-0c84782421104993b6ed86aed8f0657f', '2b0d54493b724750bc1d8ff3c8200619', '2026-02-03 16:54:24', '2026-02-03 16:54:24');
 INSERT INTO `question` VALUES ('3ed7d961b7d14e0cbc3029219b28fde3', '<p>废旧的手机可以随便丢弃</p>', 5, '3', 7, 3, 3, 1, '<p><br></p>', '03a903a719154ef1ab8c56b6019fe258-f2292e28512a4e9984f42eb24af81f95', 'f2292e28512a4e9984f42eb24af81f95', '2026-02-03 15:40:22', '2026-02-03 15:40:22');
 INSERT INTO `question` VALUES ('5860b9ec9b0f4d8fb04bd1732b576832', '<p>生活中可以随便扫描街头的二维码</p>', 5, '3', 7, 3, 3, 1, '<p><br></p>', '4124e29b9748442f9d1c68fbad14e01d-6207787a2fc641e79fa26c0bf10be369', '6207787a2fc641e79fa26c0bf10be369', '2026-02-03 15:39:46', '2026-02-03 15:39:46');
@@ -327,7 +330,9 @@ INSERT INTO `question_option` VALUES ('6d57d11c75c8476084bbbf6659f09342', '3', N
 INSERT INTO `question_option` VALUES ('72c1b9ca9f8d43b5bbab1f5206b984e5', '流程线', NULL);
 INSERT INTO `question_option` VALUES ('7c2b959c8bd141caa6b98a1771a13a18', '错误', NULL);
 INSERT INTO `question_option` VALUES ('939b0c5409154db288b60330423cde53', 'wps', NULL);
+INSERT INTO `question_option` VALUES ('9af6202e4d6f42a8a626a59c38bdf39f', '15', NULL);
 INSERT INTO `question_option` VALUES ('b595bbcfe75e4c379048e3c5d974c804', '2', NULL);
+INSERT INTO `question_option` VALUES ('dfc51352d05842218f8c6bf3cf1d70e2', '20', NULL);
 INSERT INTO `question_option` VALUES ('f2292e28512a4e9984f42eb24af81f95', '错误', NULL);
 
 -- ----------------------------
