@@ -96,6 +96,23 @@ export const asyncRouterMap = [
           }
         ]
       },
+	  // 基础配置
+      {
+        path: '/basic-config',
+        name: 'basic-config',
+        redirect: '/list/basic-config',
+        component: PageView,
+        hideChildrenInMenu: true,
+        meta: { title: '基础配置', keepAlive: true, icon: 'user', permission: ['basic-config'] },
+        children: [
+          {
+            path: '/list/basic-config',
+            name: 'BasicConfig',
+            component: () => import('../views/list/BasicConfig'),
+            meta: { title: '管理基础配置', keepAlive: true, permission: ['basic-config'] }
+          }
+        ]
+      },
       // account
       {
         path: '/account',
